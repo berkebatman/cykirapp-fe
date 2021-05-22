@@ -6,7 +6,6 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 // Route dependecies
 import Home from "../src/pages/Home";
-
 import Rent from "../src/pages/Rent";
 
 function App() {
