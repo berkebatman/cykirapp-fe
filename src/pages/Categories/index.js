@@ -12,7 +12,7 @@ const Categories = () => {
   if (error) {
     return <div>Something went wrong</div>;
   }
-  console.log(products);
+
 
   return (
     <>

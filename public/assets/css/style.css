@@ -2146,7 +2146,6 @@ a.default-btn {
 .main-menu nav ul {
   display: block;
   text-align: center;
-  margin-top: -5px;
 }
 .main-menu nav ul li {
   display: inline-block;
@@ -12503,7 +12502,7 @@ a.default-btn {
 }
 
 .shop-instagram-title {
-  padding: 165px 20px 168px;
+  padding: 75px 50px 75px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .shop-instagram-title {
@@ -15639,6 +15638,27 @@ h3.cart-page-title {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
+
+.buttons-container button {
+  background-color: #f2f2f2;
+  border: medium none;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 11px 30px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.buttons-container button:hover {
+  background-color: #a749ff;
+  color: #fff;
+}
+
 .login-register-wrapper .login-form-container .login-register-form form .button-box button:hover {
   background-color: #a749ff;
   color: #fff;

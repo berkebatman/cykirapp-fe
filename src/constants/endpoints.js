@@ -6,4 +6,8 @@ const product = {
   getProducts: () => `/products`,
 };
 
-export { product };
+const category = {
+  getProductCategories: () => `/categories`,
+};
+
+export { product, category };
