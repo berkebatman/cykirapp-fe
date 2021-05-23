@@ -1,6 +1,19 @@
 import React from "react";
+import useAPI from "../../effects/useAPI";
+import getProducts from "../../services/Products/getProducts"
 
-const Rent = () => {
+const Categories = () => {
+  const [loading, error, products] = useAPI(() => getProducts(), []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Something went wrong</div>;
+  }
+  console.log(products);
+
   return (
     <>
       <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
@@ -1185,4 +1198,4 @@ const Rent = () => {
   );
 };
 
-export default Rent;
+export default Categories;

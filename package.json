@@ -1,15 +1,28 @@
 {
-  "name": "cykirapp-fe",
+  "name": "kirapp-fe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.3",
+    "@types/date-fns": "^2.6.0",
+    "axios": "^0.21.1",
+    "date-fns": "^2.21.3",
+    "dotenv": "^10.0.0",
+    "emoji-js": "^3.5.0",
+    "highlight.js": "^10.7.1",
+    "jquery": "^3.5.1",
+    "markdown-to-jsx": "^7.1.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-render-html": "^0.6.0",
+    "react-router-dom": "^5.2.0",
+    "react-script-loader-hoc": "^1.2.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "react-toggle": "^4.1.2",
+    "styled-components": "^5.2.3",
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,7 +34,11 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "jsx-a11y/anchor-is-valid": "off",
+      "jsx-a11y/alt-text": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -34,8 +51,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-router-dom": "^5.2.0"
   }
 }
