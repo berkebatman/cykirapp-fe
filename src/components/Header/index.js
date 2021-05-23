@@ -31,7 +31,7 @@ const Header = () => {
                       <li>
                         <Link to="/categories">
                           <a href="categories" className="link-header">
-                            Categories
+                            Products
                           </a>
                         </Link>
                       </li>

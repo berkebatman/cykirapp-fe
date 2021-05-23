@@ -28,7 +28,7 @@ const Home = () => {
       <div class="shop-instagram-area hm9-section-padding pb-70">
         <div class="container-fluid">
           <div
-            class="shop-instagram-title text-center bg-gray-2 mb-20"
+            class="shop-instagram-title text-center bg-gray-2 mb-10"
             style={{ backgroundColor: "black" }}
           >
             <h1 style={{ margin: "10px", color: "whitesmoke" }}>
@@ -47,22 +47,22 @@ const Home = () => {
           </div>
         </div>
         <div>
-          <h2 class="mb-20">Categories</h2>
+          <h2 class="mb-50 mt-40">Categories</h2>
         </div>
 
         <div class="shop-instagram-bottom">
           <div class="container-fluid">
             <div class="row">
               {categories.categories.map((cat) => {
-                console.log(cat.categoryImage);
+              
                 return (
                   <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-instagram-2 mb-30">
+                    <div class="single-instagram-2 mb-30 mt-28">
                       <a href="product-details.html">
                         <img
                           src={cat.categoryImage}
-                          width="150px"
-                          height="225px"
+                          width="80px"
+                          height="110px"
                           alt=""
                           style={{ borderRadius: "15px" }}
                         />
@@ -82,15 +82,15 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div class="suppoer-area pt-100 pb-60">
+      <div class="suppoer-area pt-100 pb-60" style={{paddingTop:"10px"}}>
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="support-wrap-2 mb-30 support-shape text-center">
                     <div class="support-content-2">
                         <img class="animated" src="assets/img/icon-img/support-1.png" alt=""/>
-                        <h5>Free Shipping</h5>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed</p>
+                        <h5>Rent a product</h5>
+                        <p>Generate income from your unused items or unsold inventory.</p>
                     </div>
                 </div>
             </div>
@@ -98,8 +98,8 @@ const Home = () => {
                 <div class="support-wrap-2 mb-30 support-shape text-center">
                     <div class="support-content-2">
                         <img class="animated" src="assets/img/icon-img/support-2.png" alt=""/>
-                        <h5>Support 24/7</h5>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed</p>
+                        <h5>Outstanding Support</h5>
+                        <p>Our team is at your convenience through many media channels.</p>
                     </div>
                 </div>
             </div>
@@ -107,8 +107,8 @@ const Home = () => {
                 <div class="support-wrap-2 mb-30 text-center">
                     <div class="support-content-2">
                         <img class="animated" src="assets/img/icon-img/support-3.png" alt=""/>
-                        <h5>Money Return</h5>
-                        <p>Lorem ipsum dolor sit amet consectetu adipisicing elit sed</p>
+                        <h5>100% insured</h5>
+                        <p>Products are insered by our partners.</p>
                     </div>
                 </div>
             </div>
@@ -120,8 +120,8 @@ const Home = () => {
           <div class="row">
             <div class="col-xl-5 col-lg-7 col-md-10 ml-auto mr-auto">
               <div class="subscribe-style-3 text-center">
-                <h2>Join With Us! </h2>
-                <p>Subscribe to our newsletter to receive news on update</p>
+                <h2>Subscribe</h2>
+                <p>Subscribe to our newsletter to receive updated on new products and product availability</p>
                 <div id="mc_embed_signup" class="subscribe-form-3 mt-35">
                   <form
                     id="mc-embedded-subscribe-form"

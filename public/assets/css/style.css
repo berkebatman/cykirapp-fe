@@ -12577,7 +12577,8 @@ a.default-btn {
 }
 .single-instagram-2 .instagram-2-icon a {
   display: inline-block;
-  color: #fff;
+  background-color: whitesmoke;
+  color: #e4405f;
   font-size: 30px;
   -webkit-transition: all 0.5s ease 0s;
   -o-transition: all 0.5s ease 0s;

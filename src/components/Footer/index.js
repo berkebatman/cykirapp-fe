@@ -8,11 +8,10 @@ return (
 <div class="footer-top pt-80 pb-60 text-center bg-gray-2">
     <div class="container">
         <div class="footer-logo">
-            <a href="index.html">
-                <img alt="" src="assets/img/logo/logo.png"/>
+            <a href="/about">
+            <h2 style={{color:"#a749ff", marginBottom: "50px"}} >kirapp.</h2>
             </a>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</p>
         <div class="footer-social">
             <ul>
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -27,7 +26,7 @@ return (
 <div class="footer-bottom text-center">
     <div class="container">
         <div class="copyright-2 copyright-gray">
-            <p>© 2020 <a href="#">Flone</a> .All Rights Reserved.</p>
+            <p>© 2021 <a href="#">kirapp.</a> All Rights Reserved.</p>
         </div>
     </div>
 </div>
