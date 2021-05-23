@@ -10,4 +10,8 @@ const category = {
   getProductCategories: () => `/categories`,
 };
 
-export { product, category };
+const blog = {
+  getBlogs: () => `/blogs`,
+};
+
+export { product, category, blog };
