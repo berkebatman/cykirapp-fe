@@ -4,7 +4,7 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 // Route dependecies
 import Home from "../src/pages/Home";
-import Categories from "../src/pages/Categories";
+import Products from "../src/pages/Products";
 import Blog from "../src/pages/Blog";
 import About from "../src/pages/About";
 import Contact from "../src/pages/Contact";
@@ -22,7 +22,7 @@ export default function App() {
         <div className="App">
           <Switch>
           <Route path="/home" component={Home} />
-          <Route path="/categories" component={Categories} />
+          <Route path="/products" component={Products} />
           <Route path="/blog" component={Blog} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />

@@ -29,9 +29,17 @@ const Header = () => {
                       </li>
 
                       <li>
-                        <Link to="/categories">
+                        <Link to="/products">
                           <a href="categories" className="link-header">
                             Products
+                          </a>
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link to="/listanitem">
+                          <a href="blog" className="link-header">
+                            List an Item
                           </a>
                         </Link>
                       </li>
@@ -43,6 +51,8 @@ const Header = () => {
                           </a>
                         </Link>
                       </li>
+
+                      
 
                       <li>
                       <Link to="/about">

@@ -1,27 +1,48 @@
 import React, { useState } from "react";
 import useAPI from "../../effects/useAPI";
 import getProductCategories from "../../services/Categories/getCategories";
-import getProducts from "../../services/Products/getProducts"
+import getProductsByCategory from "../../services/Products/getProductsByCategory";
+import getProducts from "../../services/Products/getProducts";
+import { product } from "../../constants/endpoints";
 
-const Categories = () => {
-  const [category, setCategory] = useState("");
+const Products = () => {
+  //state management
+  const [category, setCategory] = useState("musical instruments");
 
+  // decoding
+  const decodedCategory = decodeURIComponent(category);
+
+  // api requests
   const [loading, error, products] = useAPI(() => getProducts(), []);
-  const [loadingCategories, errorCategories, categories] = useAPI(() => getProductCategories(), [category]);
+  const [
+    loadingProductsByCategory,
+    errorProductsByCategory,
+    productsByCategory,
+  ] = useAPI(
+    () => getProductsByCategory({ categoryName: decodedCategory }),
+    [category]
+  );
+  const [loadingCategories, errorCategories, categories] = useAPI(
+    () => getProductCategories(),
+    []
+  );
 
-  if (loading || loadingCategories ) {
-    return <div>Loading...</div>;
+  if (loading || loadingCategories || loadingProductsByCategory) {
+    return <div>Getting most up-to-date products just for you.</div>;
   }
 
-  if (error || errorCategories) {
+  if (error || errorCategories || errorProductsByCategory) {
     return <div>Something went wrong</div>;
   }
+
+  // console log
   console.log(products, "products");
-  console.log(categories, "categories")
-  
+  console.log(productsByCategory, "productsByCategory");
+  console.log(categories, "categories");
+
   return (
     <>
-      <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
+      {/* <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
         <div class="container">
           <div class="breadcrumb-content text-center">
             <ul>
@@ -32,12 +53,12 @@ const Categories = () => {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
       <div class="shop-area pt-95 pb-100">
         <div class="container">
           <div class="row">
             <div class="col-lg-9">
-              <div class="shop-top-bar">
+              {/* <div class="shop-top-bar">
                 <div class="select-shoing-wrap">
                   <div class="shop-select">
                     <select>
@@ -51,79 +72,88 @@ const Categories = () => {
                 </div>
                 <div class="shop-tab nav">
                   <a class="active" href="#shop-1" data-toggle="tab">
-                    {/* <i class="fa fa-table"></i> */}
+                    {/* <i class="fa fa-table"></i> 
                   </a>
                   <a href="#shop-2" data-toggle="tab">
                     <i class="fa fa-list-ul"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
+
               <div class="shop-bottom-area mt-35">
                 <div class="tab-content jump">
-                  <div id="shop-1" class="tab-pane ">
+                  <div id="shop-1" class="tab-pane active ">
                     <div class="row">
-                      <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                        <div class="product-wrap mb-25 scroll-zoom">
-                          <div class="product-img">
-                            <a href="product-details.html">
-                              <img
-                                class="default-img"
-                                src="assets/img/product/pro-1.jpg"
-                                alt=""
-                              />
-                              <img
-                                class="hover-img"
-                                src="assets/img/product/pro-1-1.jpg"
-                                alt=""
-                              />
-                            </a>
-                            <span class="pink">-10%</span>
-                            <div class="product-action">
-                              <div class="pro-same-action pro-wishlist">
-                                <a title="Wishlist" href="#">
-                                  <i class="pe-7s-like"></i>
+                      {products.products.map((product) => {
+                        return (
+                          <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
+                            <div class="product-wrap mb-25 scroll-zoom">
+                              <div class="product-img">
+                                <a href="product-details.html">
+                                  <img
+                                    class="default-img"
+                                    src={product.image}
+                                    alt=""
+                                    style={{
+                                      height: 200,
+                                      width: 250,
+                                      borderRadius: "15px",
+                                    }}
+                                  />
+                                  <img class="hover-img" src="" alt="" />
                                 </a>
+                                {/* <span class="pink">-10%</span> */}
+                                <div class="product-action">
+                                  <div class="pro-same-action pro-wishlist">
+                                    <a title="Wishlist" href="#">
+                                      <i class="pe-7s-like"></i>
+                                    </a>
+                                  </div>
+                                  <div
+                                    class="pro-same-action pro-cart"
+                                    style={{ width: "205px" }}
+                                  >
+                                    <a title="Add To Cart" href="#">
+                                      <i class="pe-7s-cart"></i> Add to cart
+                                    </a>
+                                  </div>
+                                  {/* <div class="pro-same-action pro-quickview">
+                                    <a
+                                      title="Quick View"
+                                      href="#"
+                                      data-toggle="modal"
+                                      data-target="#exampleModal"
+                                    >
+                                      <i class="pe-7s-look"></i>
+                                    </a>
+                                  </div> */}
+                                </div>
                               </div>
-                              <div class="pro-same-action pro-cart">
-                                <a title="Add To Cart" href="#">
-                                  <i class="pe-7s-cart"></i> Add to cart
-                                </a>
-                              </div>
-                              <div class="pro-same-action pro-quickview">
-                                <a
-                                  title="Quick View"
-                                  href="#"
-                                  data-toggle="modal"
-                                  data-target="#exampleModal"
-                                >
-                                  <i class="pe-7s-look"></i>
-                                </a>
+                              <div class="product-content text-center">
+                                <h3>
+                                  <a href="product-details.html">
+                                    {product.productName}
+                                  </a>
+                                </h3>
+                                <div class="product-rating">
+                                  <i class="fa fa-star-o yellow"></i>
+                                  <i class="fa fa-star-o yellow"></i>
+                                  <i class="fa fa-star-o yellow"></i>
+                                  <i class="fa fa-star-o"></i>
+                                  <i class="fa fa-star-o"></i>
+                                </div>
+                                <div class="product-price">
+                                  <span>{product.price}₺/day</span>
+                                  {/* <span class="old">$ 60.00</span> */}
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div class="product-content text-center">
-                            <h3>
-                              <a href="product-details.html">
-                                T- Shirt And Jeans
-                              </a>
-                            </h3>
-                            <div class="product-rating">
-                              <i class="fa fa-star-o yellow"></i>
-                              <i class="fa fa-star-o yellow"></i>
-                              <i class="fa fa-star-o yellow"></i>
-                              <i class="fa fa-star-o"></i>
-                              <i class="fa fa-star-o"></i>
-                            </div>
-                            <div class="product-price">
-                              <span>$ 60.00</span>
-                              <span class="old">$ 60.00</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        );
+                      })}
                     </div>
                   </div>
-                  <div id="shop-2" class="tab-pane active">
+                  <div id="shop-2" class="tab-pane ">
                     <div class="shop-list-wrap mb-30 scroll-zoom">
                       <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-5 col-sm-6">
@@ -340,7 +370,7 @@ const Categories = () => {
                     </div>
                   </div>
                 </div>
-                <div class="pro-pagination-style text-center mt-30">
+                {/* <div class="pro-pagination-style text-center mt-30">
                   <ul>
                     <li>
                       <a class="prev" href="#">
@@ -361,7 +391,7 @@ const Categories = () => {
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
             <div class="col-lg-3">
@@ -378,28 +408,23 @@ const Categories = () => {
                   </div>
                 </div>
                 <div class="sidebar-widget mt-50">
-                  <h4 class="pro-sidebar-title">Tag </h4>
+                  <h4 class="pro-sidebar-title">Category</h4>
                   <div class="sidebar-widget-tag mt-25">
                     <ul>
                       <li>
-                        <a href="#">Clothing</a>
+                        <a href="#">All</a>
                       </li>
-                      <li>
-                        <a href="#">Accessories</a>
-                      </li>
-                      <li>
-                        <a href="#">For Men</a>
-                      </li>
-                      <li>
-                        <a href="#">Women</a>
-                      </li>
-                      <li>
-                        <a href="#">Fashion</a>
-                      </li>
+                      {categories.categories.map((category) => {
+                        return (
+                        <li>
+                          <a href="#">{category.categoryName}</a>
+                        </li>
+                        )
+                      })}
                     </ul>
                   </div>
                 </div>
-              
+
                 <div class="sidebar-widget">
                   <h4 class="pro-sidebar-title">Refine By </h4>
                   <div class="sidebar-widget-list mt-30">
@@ -416,8 +441,6 @@ const Categories = () => {
                     </ul>
                   </div>
                 </div>
-              
-              
               </div>
             </div>
           </div>
@@ -632,4 +655,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Products;

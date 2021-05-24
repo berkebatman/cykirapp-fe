@@ -4,6 +4,7 @@
 
 const product = {
   getProducts: () => `/products`,
+  getProductsByCategory: ({ categoryName } ) => `/category/${categoryName}`
 };
 
 const category = {
