@@ -7,7 +7,7 @@ import { product } from "../../constants/endpoints";
 
 const Products = () => {
   //state management
-  const [category, setCategory] = useState("musical instruments");
+  const [category, setCategory] = useState("All");
 
   // decoding
   const decodedCategory = decodeURIComponent(category);
@@ -35,6 +35,24 @@ const Products = () => {
     return <div>Something went wrong</div>;
   }
 
+  console.log(productsByCategory)
+  // functions
+  const availabilityToRender = (availability) => {
+    if (availability === 1) {
+      return "In Stock";
+    } else {
+      return "Out of Stock";
+    }
+  };
+
+  let productsToRender;
+  if (category === "All") {
+    productsToRender = products.products;
+  } else {
+    productsToRender = productsByCategory.productsByCategory;
+  }
+
+
   // console log
   console.log(products, "products");
   console.log(productsByCategory, "productsByCategory");
@@ -54,7 +72,7 @@ const Products = () => {
           </div>
         </div>
       </div> */}
-      <div class="shop-area pt-95 pb-100">
+      <div class="shop-area pt-30 pb-100">
         <div class="container">
           <div class="row">
             <div class="col-lg-9">
@@ -84,7 +102,7 @@ const Products = () => {
                 <div class="tab-content jump">
                   <div id="shop-1" class="tab-pane active ">
                     <div class="row">
-                      {products.products.map((product) => {
+                      {productsToRender.map((product) => {
                         return (
                           <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                             <div class="product-wrap mb-25 scroll-zoom">
@@ -136,11 +154,7 @@ const Products = () => {
                                   </a>
                                 </h3>
                                 <div class="product-rating">
-                                  <i class="fa fa-star-o yellow"></i>
-                                  <i class="fa fa-star-o yellow"></i>
-                                  <i class="fa fa-star-o yellow"></i>
-                                  <i class="fa fa-star-o"></i>
-                                  <i class="fa fa-star-o"></i>
+                                  {availabilityToRender(product.availability)}
                                 </div>
                                 <div class="product-price">
                                   <span>{product.price}₺/day</span>
@@ -396,7 +410,7 @@ const Products = () => {
             </div>
             <div class="col-lg-3">
               <div class="sidebar-style ml-30">
-                <div class="sidebar-widget">
+                {/* <div class="sidebar-widget">
                   <h4 class="pro-sidebar-title">Search </h4>
                   <div class="pro-sidebar-search mb-50 mt-25">
                     <form class="pro-sidebar-search-form" action="#">
@@ -406,20 +420,42 @@ const Products = () => {
                       </button>
                     </form>
                   </div>
-                </div>
+                </div> */}
                 <div class="sidebar-widget mt-50">
                   <h4 class="pro-sidebar-title">Category</h4>
-                  <div class="sidebar-widget-tag mt-25">
+                  <div class="sidebar-widget-tag mt-20">
                     <ul>
                       <li>
-                        <a href="#">All</a>
+                        <a
+                          href="#"
+                          style={{
+                            backgroundColor: category === "All" ? "#8200fc" : "",
+                            color: category === "All" ? "#fff" : "",
+                          }}
+                          onClick={() => {
+                            setCategory("All")
+                           }}
+                        >
+                          All
+                        </a>
                       </li>
-                      {categories.categories.map((category) => {
+                      {categories.categories.map((cat) => {
                         return (
-                        <li>
-                          <a href="#">{category.categoryName}</a>
-                        </li>
-                        )
+                          <li>
+                            <a href="#"
+                            style={{
+                              backgroundColor: category === cat.categoryName ? "#8200fc" : "",
+                              color: category === cat.categoryName ? "#fff" : "",
+                            }}
+                            onClick={() => {
+                              setCategory(cat.categoryName);
+                            }
+                            }
+                            >
+                              {cat.categoryName}
+                              </a>
+                          </li>
+                        );
                       })}
                     </ul>
                   </div>
