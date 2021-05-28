@@ -4,7 +4,8 @@
 
 const product = {
   getProducts: () => `/products`,
-  getProductsByCategory: ({ categoryName } ) => `/category/${categoryName}`
+  getProductsByCategory: ({ categoryName } ) => `/category/${categoryName}`,
+  getProductById: ({ productId }) => `/product/${productId}`,
 };
 
 const category = {
@@ -15,4 +16,8 @@ const blog = {
   getBlogs: () => `/blogs`,
 };
 
-export { product, category, blog };
+const user = {
+  register: () => `/register`,
+}
+
+export { product, category, blog, user };

@@ -71,15 +71,15 @@ const Header = () => {
               
               <div class="col-xl-2 col-lg-2 col-md-6 col-8">
                        <div class="header-right-wrap">
-                        <div class="same-style header-search">
+                        {/* <div class="same-style header-search">
                             <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
                             <div class="search-content">
                                 <form action="#">
                                     <input type="text" placeholder="Search" />
                                     <button class="button-search"><i class="pe-7s-search"></i></button>
                                 </form>
-                            </div> 
-                        </div>
+                            </div>
+                        </div> */}
                         <div class="same-style account-satting">
                             <a class="account-satting-active" href="#"><i class="pe-7s-user-female"></i></a>
                             <div class="account-dropdown">

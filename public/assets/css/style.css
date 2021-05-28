@@ -7629,10 +7629,12 @@ a.default-btn {
       -ms-flex-align: center;
           align-items: center;
   margin: 15px 0 26px;
+  align-items: baseline;
+ 
 }
 .product-details-content .product-details-price span {
   font-size: 24px;
-  color: #fe5252;
+  color: #a749ff;
 }
 .product-details-content .product-details-price span.old {
   color: #333;
@@ -7691,6 +7693,7 @@ a.default-btn {
 .product-details-content .pro-details-list ul li {
   color: #333;
   margin: 0 0 5px;
+  display: flex;
 }
 .product-details-content .pro-details-list ul li:last-child {
   margin: 0;
@@ -13287,7 +13290,7 @@ a.default-btn {
           transform: rotate(45deg);
 }
 .sidebar-widget .sidebar-widget-list ul li a {
-  margin-left: 30px;
+  margin-left: 0px;
   display: block;
 }
 .sidebar-widget .sidebar-widget-list ul li a span {

@@ -1,20 +1,10 @@
 import React from "react";
-
+import {Link} from "react-router-dom";
+ 
 const Login = () => {
    return (
       <>
-      <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
-      <div class="container">
-          <div class="breadcrumb-content text-center">
-              <ul>
-                  <li>
-                      <a href="index.html">Home</a>
-                  </li>
-                  <li class="active">login/Register </li>
-              </ul>
-          </div>
-      </div>
-  </div>
+     
   <div class="login-register-area pt-100 pb-100">
       <div class="container">
           <div class="row">
@@ -22,11 +12,14 @@ const Login = () => {
                   <div class="login-register-wrapper">
                       <div class="login-register-tab-list nav">
                           <a class="active" data-toggle="tab" href="#lg1">
-                              <h4> login </h4>
+                              <h4 style={{fontSize:"35px"}}> login </h4>
                           </a>
+                          <Link to="register">
                           <a data-toggle="tab" href="#lg2">
                               <h4> register </h4>
+                              
                           </a>
+                          </Link>
                       </div>
                       <div class="tab-content">
                           <div id="lg1" class="tab-pane active">

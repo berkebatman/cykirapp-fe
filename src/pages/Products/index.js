@@ -4,14 +4,21 @@ import getProductCategories from "../../services/Categories/getCategories";
 import getProductsByCategory from "../../services/Products/getProductsByCategory";
 import getProducts from "../../services/Products/getProducts";
 import { product } from "../../constants/endpoints";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   //state management
   const [category, setCategory] = useState("All");
+  const [checked, setChecked] = useState(false);
 
   // decoding
   const decodedCategory = decodeURIComponent(category);
-
+ 
+  // handlers 
+  const handleCheckboxChange = (e) => {
+    setChecked(!checked)
+  }
   // api requests
   const [loading, error, products] = useAPI(() => getProducts(), []);
   const [
@@ -35,7 +42,7 @@ const Products = () => {
     return <div>Something went wrong</div>;
   }
 
-  console.log(productsByCategory)
+  console.log(productsByCategory);
   // functions
   const availabilityToRender = (availability) => {
     if (availability === 1) {
@@ -51,7 +58,6 @@ const Products = () => {
   } else {
     productsToRender = productsByCategory.productsByCategory;
   }
-
 
   // console log
   console.log(products, "products");
@@ -108,7 +114,9 @@ const Products = () => {
                             <div class="product-wrap mb-25 scroll-zoom">
                               <div class="product-img">
                                 <a href="product-details.html">
-                                  <img
+                                <Link to={`product/${product.productId}`}>
+                                  
+                                <img
                                     class="default-img"
                                     src={product.image}
                                     alt=""
@@ -119,6 +127,9 @@ const Products = () => {
                                     }}
                                   />
                                   <img class="hover-img" src="" alt="" />
+                               
+                                </Link>
+                                 
                                 </a>
                                 {/* <span class="pink">-10%</span> */}
                                 <div class="product-action">
@@ -149,9 +160,11 @@ const Products = () => {
                               </div>
                               <div class="product-content text-center">
                                 <h3>
-                                  <a href="product-details.html">
+                                  <Link to={`product/${product.productId}`}>
+                                  
                                     {product.productName}
-                                  </a>
+                                 
+                                  </Link>
                                 </h3>
                                 <div class="product-rating">
                                   {availabilityToRender(product.availability)}
@@ -429,12 +442,13 @@ const Products = () => {
                         <a
                           href="#"
                           style={{
-                            backgroundColor: category === "All" ? "#8200fc" : "",
+                            backgroundColor:
+                              category === "All" ? "#8200fc" : "",
                             color: category === "All" ? "#fff" : "",
                           }}
                           onClick={() => {
-                            setCategory("All")
-                           }}
+                            setCategory("All");
+                          }}
                         >
                           All
                         </a>
@@ -442,18 +456,22 @@ const Products = () => {
                       {categories.categories.map((cat) => {
                         return (
                           <li>
-                            <a href="#"
-                            style={{
-                              backgroundColor: category === cat.categoryName ? "#8200fc" : "",
-                              color: category === cat.categoryName ? "#fff" : "",
-                            }}
-                            onClick={() => {
-                              setCategory(cat.categoryName);
-                            }
-                            }
+                            <a
+                              href="#"
+                              style={{
+                                backgroundColor:
+                                  category === cat.categoryName
+                                    ? "#8200fc"
+                                    : "",
+                                color:
+                                  category === cat.categoryName ? "#fff" : "",
+                              }}
+                              onClick={() => {
+                                setCategory(cat.categoryName);
+                              }}
                             >
                               {cat.categoryName}
-                              </a>
+                            </a>
                           </li>
                         );
                       })}
@@ -463,15 +481,35 @@ const Products = () => {
 
                 <div class="sidebar-widget">
                   <h4 class="pro-sidebar-title">Refine By </h4>
-                  <div class="sidebar-widget-list mt-30">
+                  <div class="sidebar-widget-list mt-10">
                     <ul>
                       <li>
                         <div class="sidebar-widget-list-left">
-                          <input type="checkbox" value="" />{" "}
-                          <a href="#">
-                            In Stock <span>4</span>{" "}
-                          </a>
-                          <span class="checkmark"></span>
+                          <div
+                            className="container-cb"
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Checkbox
+                              color="primary"
+                              inputProps={{
+                                "aria-label": "secondary checkbox",
+                              }}
+                              setChecked
+                              onClick={handleCheckboxChange}
+                              checked={checked}
+                              
+                             
+                            />
+                            <div>
+                              <a href="#">In Stock </a>
+                            </div>
+                            <div>4</div>
+                          </div>
                         </div>
                       </li>
                     </ul>

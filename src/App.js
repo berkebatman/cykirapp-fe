@@ -10,7 +10,9 @@ import About from "../src/pages/About";
 import Contact from "../src/pages/Contact";
 import Wishlist from "../src/pages/Wishlist";
 import Login from "../src/pages/Login";
-import MyAccount from "./pages/MyAccount";
+import Register from "../src/pages/Register";
+import MyAccount from "../src/pages/MyAccount";
+import ProductPage from "../src/pages/ProductPage";
 
 export default function App() {
   return (
@@ -23,11 +25,13 @@ export default function App() {
           <Switch>
           <Route path="/home" component={Home} />
           <Route path="/products" component={Products} />
+          <Route path="/product/:id" component={ProductPage} />
           <Route path="/blog" component={Blog} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/wishlist" component={Wishlist} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/myaccount" component={MyAccount} />
           </Switch>
         </div>

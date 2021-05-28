@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import flattenDeep from "utils/flattenDeep";
+import flattenDeep from "../../utils/flattenDeep";
 
 /*
 {
