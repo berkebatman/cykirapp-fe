@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route, withRo } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRo,
+} from "react-router-dom";
 import "./App.css";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
@@ -13,33 +18,36 @@ import Login from "../src/pages/Login";
 import Register from "../src/pages/Register";
 import MyAccount from "../src/pages/MyAccount";
 import ProductPage from "../src/pages/ProductPage";
+import RegisterSuccess from "../src/pages/RegisterSuccess";
+import LoginSuccess from "../src/pages/LoginSuccess"
 
 export default function App() {
   return (
     <>
-    <Router>
-      <div>
-        <Header />
-      </div>
+      <Router>
+        <div>
+          <Header />
+        </div>
         <div className="App">
           <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/products" component={Products} />
-          <Route path="/product/:id" component={ProductPage} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/wishlist" component={Wishlist} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/myaccount" component={MyAccount} />
+            <Route path="/home" component={Home} />
+            <Route path="/products" component={Products} />
+            <Route path="/product/:id" component={ProductPage} />
+            <Route path="/blog" component={Blog} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/wishlist" component={Wishlist} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/register-success" component={RegisterSuccess} />
+            <Route path="/myaccount" component={MyAccount} />
+            <Route path="/login-success" component={LoginSuccess} />
           </Switch>
         </div>
-      <div>
-       <Footer />
-      </div>
+        <div>
+          <Footer />
+        </div>
       </Router>
     </>
   );
 }
-

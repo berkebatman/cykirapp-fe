@@ -18,6 +18,7 @@ const blog = {
 
 const user = {
   register: () => `/register`,
+  login: () => `/login`
 }
 
 export { product, category, blog, user };
