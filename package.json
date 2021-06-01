@@ -20,6 +20,7 @@
     "muicss": "^0.10.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-images-upload": "^1.2.8",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^5.2.0",
     "react-script-loader-hoc": "^1.2.2",

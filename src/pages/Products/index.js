@@ -3,11 +3,18 @@ import useAPI from "../../effects/useAPI";
 import getProductCategories from "../../services/Categories/getCategories";
 import getProductsByCategory from "../../services/Products/getProductsByCategory";
 import getProducts from "../../services/Products/getProducts";
-import { product } from "../../constants/endpoints";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
+import Authentication from "../../services/Authentication";
+
+const auth = new Authentication();
 
 const Products = () => {
+  // user management
+
+  const jwtPayload = auth.getAccessTokenPayload();
+  console.table(jwtPayload);
+
   //state management
   const [category, setCategory] = useState("All");
   const [checked, setChecked] = useState(false);
@@ -42,7 +49,8 @@ const Products = () => {
     return <div>Something went wrong</div>;
   }
 
-  console.log(productsByCategory);
+  
+  
   // functions
   const availabilityToRender = (availability) => {
     if (availability === 1) {
