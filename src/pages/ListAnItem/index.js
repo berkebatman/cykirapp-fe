@@ -157,12 +157,12 @@ const ListAnItem = () => {
                               </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6">
-                              <div class="billing-info">
+                            <div class="col-lg-6 col-md-6" >
+                              <div class="billing-info" >
                                 <label style={{ fontWeight: "bolder" }}>
-                                  Price
+                                  Price (₺/day)
                                 </label>
-                                <input
+                                <input style={{textAlign: "center"}}
                                   type="number"
                                   onChange={(e) => {
                                     setPrice(e.target.value);
@@ -269,17 +269,20 @@ const ListAnItem = () => {
                                     marginTop: "5px",
                                   }}
                                   type="file"
+                                  onChange={(event) => {
+                                    setImage(event.target.files[0]);
+                                  }}
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="billing-back-btn">
-                            <div class="billing-back">
+                          <div class="billing-back-btn"  style={{ justifyContent: "center"}}>
+                            {/* <div class="billing-back">
                               <a href="#">
                                 <i class="fa fa-arrow-up"></i> back
                               </a>
-                            </div>
-                            <div class="billing-btn">
+                            </div> */}
+                            <div class="billing-btn" style={{ justifyContent: "center", width: "500px"}}>
                               <button type="submit" onClick={handleProductPost}>
                                 List product
                               </button>

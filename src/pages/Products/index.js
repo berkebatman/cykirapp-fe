@@ -86,7 +86,7 @@ const Products = () => {
           </div>
         </div>
       </div> */}
-      <div class="shop-area pt-30 pb-100">
+      <div class="shop-area  pb-100">
         <div class="container">
           <div class="row">
             <div class="col-lg-9">
@@ -126,7 +126,7 @@ const Products = () => {
                                   
                                 <img
                                     class="default-img"
-                                    src={product.image}
+                                    src={"http://localhost:3001/" + product.image}
                                     alt=""
                                     style={{
                                       height: 200,
