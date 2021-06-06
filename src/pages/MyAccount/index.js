@@ -9,7 +9,6 @@ const MyAccount = () => {
   const jwtPayload = auth.getAccessTokenPayload();
   const activeUser = jwtPayload[0];
   const id = activeUser.userId;
-  console.log(id);
 
   const [loading, error, userProducts] = useAPI(
     () => getProductsByUserId({ userId: id }),
@@ -66,7 +65,9 @@ const MyAccount = () => {
                             <div class="col-lg-6 col-md-6">
                               <div class="billing-info">
                                 <div style={{ fontWeight: "bold" }}>Name</div>
-                                {activeUser.firstName + " " + activeUser.lastName}
+                                {activeUser.firstName +
+                                  " " +
+                                  activeUser.lastName}
                               </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
@@ -125,66 +126,68 @@ const MyAccount = () => {
                     </div>
 
                     <div id="my-account-2" class="panel-collapse collapse">
-                        {userProducts.productByUserId.map((product) => { 
-                            return  (
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <form action="#">
-                                
-                              <div class="table-content table-responsive cart-table-content">
-                                <table>
-                                  <thead>
-                                    <tr>
-                                      <th>Image</th>
-                                      <th>Product Name</th>
-                                      <th>Until Price</th>
-                                      <th>Qty</th>
-                                      <th>Subtotal</th>
-                                      <th>Add To Cart</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td class="product-thumbnail">
-                                        <a href="#">
-                                          <img
-                                            src={product.image}
-                                            alt=""
-                                          />
-                                        </a>
-                                      </td>
-                                      <td class="product-name">
-                                        <a href="#">{product.productName}</a>
-                                      </td>
-                                      <td class="product-price-cart">
-                                        <span class="amount">{product.price}</span>
-                                      </td>
-                                      <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                          <input
-                                            class="cart-plus-minus-box"
-                                            type="text"
-                                            name="qtybutton"
-                                            value="2"
-                                          />
-                                        </div>
-                                      </td>
-                                      <td class="product-subtotal">$150.00</td>
-                                      <td class="product-wishlist-cart">
-                                        <a href="#">add to cart</a>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                      {userProducts.productByUserId.map((product) => {
+                        return (
+                          <div class="panel-body">
+                            <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <form action="#">
+                                  <div class="table-content table-responsive cart-table-content">
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th>Image</th>
+                                          <th>Product Name</th>
+                                          <th>Until Price</th>
+                                          <th>Qty</th>
+                                          <th>Subtotal</th>
+                                          <th>Add To Cart</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td class="product-thumbnail">
+                                            <a href="#">
+                                              <img src={product.image} alt="" />
+                                            </a>
+                                          </td>
+                                          <td class="product-name">
+                                            <a href="#">
+                                              {product.productName}
+                                            </a>
+                                          </td>
+                                          <td class="product-price-cart">
+                                            <span class="amount">
+                                              {product.price}
+                                            </span>
+                                          </td>
+                                          <td class="product-quantity">
+                                            <div class="cart-plus-minus">
+                                              <input
+                                                class="cart-plus-minus-box"
+                                                type="text"
+                                                name="qtybutton"
+                                                value="2"
+                                              />
+                                            </div>
+                                          </td>
+                                          <td class="product-subtotal">
+                                            $150.00
+                                          </td>
+                                          <td class="product-wishlist-cart">
+                                            <a href="#">add to cart</a>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </form>
                               </div>
-                            </form>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                            )  
-                })}
-                </div>
+                        );
+                      })}
+                    </div>
                   </div>
                   <div class="panel panel-default single-my-account">
                     <div class="panel-heading my-account-title">
