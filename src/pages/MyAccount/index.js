@@ -64,35 +64,36 @@ const MyAccount = () => {
                         <div class="myaccount-info-wrapper">
                           <div class="row">
                             <div class="col-lg-6 col-md-6">
-                              <div class="billing-info">
+                              <div class="billing-info" style={{textAlign:"left"}}>
                                 <div style={{ fontWeight: "bold" }}>Name</div>
                                 {activeUser.firstName + " " + activeUser.lastName}
                               </div>
                             </div>
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-6 col-md-6" style={{textAlign:"left"}}>
                               <div class="billing-info">
                                 <div style={{ fontWeight: "bold" }}>Town</div>
                                 {activeUser.town}
                               </div>
                             </div>
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-6 col-md-6" style={{textAlign:"left"}}>
                               <div class="billing-info">
                                 <div style={{ fontWeight: "bold" }}>Email</div>
                                 {activeUser.email}
                               </div>
                             </div>
-                            <div class="col-lg-6 col-md-6">
+                            
+                            <div class="col-lg-6 col-md-6" style={{textAlign:"left"}}>
+                              <div class="billing-info">
+                                <div style={{ fontWeight: "bold" }}>City</div>
+                                {activeUser.city}
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6" style={{textAlign:"left"}}>
                               <div class="billing-info">
                                 <div style={{ fontWeight: "bold" }}>
                                   Phone Number
                                 </div>
                                 {activeUser.phoneNumber}
-                              </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                              <div class="billing-info">
-                                <div style={{ fontWeight: "bold" }}>City</div>
-                                {activeUser.city}
                               </div>
                             </div>
                           </div>
@@ -119,7 +120,7 @@ const MyAccount = () => {
                           data-parent="#faq"
                           href="#my-account-2"
                         >
-                          Your Orders{" "}
+                          Your Products{" "}
                         </a>
                       </h3>
                     </div>
@@ -138,10 +139,10 @@ const MyAccount = () => {
                                     <tr>
                                       <th>Image</th>
                                       <th>Product Name</th>
-                                      <th>Until Price</th>
-                                      <th>Qty</th>
-                                      <th>Subtotal</th>
-                                      <th>Add To Cart</th>
+                                      <th>Daily Rentail Price</th>
+                                      <th>Product City</th>
+                                      <th>Product Town</th>
+                                      <th>Open Rental Orders</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -149,7 +150,8 @@ const MyAccount = () => {
                                       <td class="product-thumbnail">
                                         <a href="#">
                                           <img
-                                            src={product.image}
+                                            src={"http://localhost:3001/" + product.image}
+                                            style={{height: "65px,", width: "65px"}}
                                             alt=""
                                           />
                                         </a>
@@ -160,20 +162,9 @@ const MyAccount = () => {
                                       <td class="product-price-cart">
                                         <span class="amount">{product.price}</span>
                                       </td>
-                                      <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                          <input
-                                            class="cart-plus-minus-box"
-                                            type="text"
-                                            name="qtybutton"
-                                            value="2"
-                                          />
-                                        </div>
-                                      </td>
                                       <td class="product-subtotal">$150.00</td>
-                                      <td class="product-wishlist-cart">
-                                        <a href="#">add to cart</a>
-                                      </td>
+                                      <td class="product-subtotal">$150.00</td>
+                                      <td class="product-subtotal">$150.00</td>
                                     </tr>
                                   </tbody>
                                 </table>
