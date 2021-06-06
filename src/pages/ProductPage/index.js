@@ -11,8 +11,6 @@ const ProductPage = () => {
     [id]
   );
 
-  console.log(product)
-
   if (productLoading) {
     return <div>Loading...</div>;
   }

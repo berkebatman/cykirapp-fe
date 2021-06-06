@@ -16,7 +16,7 @@ const Home = () => {
   if (error) {
     return <div>Something went wrong</div>;
   }
-  console.log(categories);
+
 
   const divertImageLink = (imageLink) => {
     let before = "../../";

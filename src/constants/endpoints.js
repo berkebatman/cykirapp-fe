@@ -6,7 +6,8 @@ const product = {
   getProducts: () => `/products`,
   getProductsByCategory: ({ categoryName } ) => `/category/${categoryName}`,
   getProductById: ({ productId }) => `/product/${productId}`,
-  postProduct: () => `/products/list-an-item`
+  postProduct: () => `/products/list-an-item`,
+  getProductsByUserId: ({ userId }) => `/productbyuser/${userId}`
 };
 
 const category = {
