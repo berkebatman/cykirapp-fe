@@ -3,22 +3,29 @@ import useAPI from "../../effects/useAPI";
 import getProductCategories from "../../services/Categories/getCategories";
 import getProductsByCategory from "../../services/Products/getProductsByCategory";
 import getProducts from "../../services/Products/getProducts";
-import { product } from "../../constants/endpoints";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
+import Authentication from "../../services/Authentication";
+
+const auth = new Authentication();
 
 const Products = () => {
+  // user management
+
+  const jwtPayload = auth.getAccessTokenPayload();
+  console.table(jwtPayload);
+
   //state management
   const [category, setCategory] = useState("All");
   const [checked, setChecked] = useState(false);
 
   // decoding
   const decodedCategory = decodeURIComponent(category);
- 
-  // handlers 
+
+  // handlers
   const handleCheckboxChange = (e) => {
-    setChecked(!checked)
-  }
+    setChecked(!checked);
+  };
   // api requests
   const [loading, error, products] = useAPI(() => getProducts(), []);
   const [
@@ -42,7 +49,6 @@ const Products = () => {
     return <div>Something went wrong</div>;
   }
 
-  console.log(productsByCategory);
   // functions
   const availabilityToRender = (availability) => {
     if (availability === 1) {
@@ -78,7 +84,7 @@ const Products = () => {
           </div>
         </div>
       </div> */}
-      <div class="shop-area pt-30 pb-100">
+      <div class="shop-area  pb-100">
         <div class="container">
           <div class="row">
             <div class="col-lg-9">
@@ -114,22 +120,21 @@ const Products = () => {
                             <div class="product-wrap mb-25 scroll-zoom">
                               <div class="product-img">
                                 <a href="product-details.html">
-                                <Link to={`product/${product.productId}`}>
-                                  
-                                <img
-                                    class="default-img"
-                                    src={product.image}
-                                    alt=""
-                                    style={{
-                                      height: 200,
-                                      width: 250,
-                                      borderRadius: "15px",
-                                    }}
-                                  />
-                                  <img class="hover-img" src="" alt="" />
-                               
-                                </Link>
-                                 
+                                  <Link to={`product/${product.productId}`}>
+                                    <img
+                                      class="default-img"
+                                      src={
+                                        "http://localhost:3001/" + product.image
+                                      }
+                                      alt=""
+                                      style={{
+                                        height: 200,
+                                        width: 250,
+                                        borderRadius: "15px",
+                                      }}
+                                    />
+                                    <img class="hover-img" src="" alt="" />
+                                  </Link>
                                 </a>
                                 {/* <span class="pink">-10%</span> */}
                                 <div class="product-action">
@@ -161,9 +166,7 @@ const Products = () => {
                               <div class="product-content text-center">
                                 <h3>
                                   <Link to={`product/${product.productId}`}>
-                                  
                                     {product.productName}
-                                 
                                   </Link>
                                 </h3>
                                 <div class="product-rating">
@@ -475,43 +478,6 @@ const Products = () => {
                           </li>
                         );
                       })}
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="sidebar-widget">
-                  <h4 class="pro-sidebar-title">Refine By </h4>
-                  <div class="sidebar-widget-list mt-10">
-                    <ul>
-                      <li>
-                        <div class="sidebar-widget-list-left">
-                          <div
-                            className="container-cb"
-                            style={{
-                              display: "flex",
-                              flexDirection: "row",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Checkbox
-                              color="primary"
-                              inputProps={{
-                                "aria-label": "secondary checkbox",
-                              }}
-                              setChecked
-                              onClick={handleCheckboxChange}
-                              checked={checked}
-                              
-                             
-                            />
-                            <div>
-                              <a href="#">In Stock </a>
-                            </div>
-                            <div>4</div>
-                          </div>
-                        </div>
-                      </li>
                     </ul>
                   </div>
                 </div>

@@ -15,19 +15,8 @@ const Blog = () => {
 
   return (
     <>
-      <div class="breadcrumb-area pt-35 pb-35 bg-gray-3">
-        <div class="container">
-          <div class="breadcrumb-content text-center">
-            <ul>
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li class="active">Blog No sidebar </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="Blog-area pt-100 pb-100 blog-no-sidebar">
+     
+      <div class="Blog-area pt-15 pb-100 blog-no-sidebar">
         <div class="container">
           <div class="row">
             <div class="col-lg-12">

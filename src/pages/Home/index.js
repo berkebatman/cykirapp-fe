@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAPI from "../../effects/useAPI";
 import getProductCategories from "../../services/Categories/getCategories";
+import Authentication from "../../services/Authentication";
+
+const auth = new Authentication();
 
 const Home = () => {
   const [loading, error, categories] = useAPI(() => getProductCategories(), []);
@@ -13,7 +16,7 @@ const Home = () => {
   if (error) {
     return <div>Something went wrong</div>;
   }
-  console.log(categories);
+
 
   const divertImageLink = (imageLink) => {
     let before = "../../";
@@ -35,14 +38,16 @@ const Home = () => {
               Rent Anything
             </h1>
             <div class="buttons-container">
-              <Link to="/categories">
+              <Link to="/products">
                 <button type="submit">
                   <span>Find an Item</span>
                 </button>
               </Link>
+              <Link to="/list-an-item">
               <button type="submit">
                 <span>List an Item</span>
               </button>
+              </Link>
             </div>
           </div>
         </div>
