@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import useAPI from "../../effects/useAPI";
 import getProductCategories from "../../services/Categories/getCategories";
 import Authentication from "../../services/Authentication";
+import { useHistory } from "react-router";
 
 const auth = new Authentication();
 
 const Home = () => {
+  let history = useHistory();
+
   const [loading, error, categories] = useAPI(() => getProductCategories(), []);
 
   if (loading) {
@@ -63,18 +66,25 @@ const Home = () => {
                 return (
                   <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="single-instagram-2 mb-30 mt-28">
-                      <a href="product-details.html">
+                      <a href="#">
                         <img
                           src={cat.categoryImage}
                           width="80px"
                           height="110px"
                           alt=""
                           style={{ borderRadius: "15px" }}
+                          onClick={() => {
+                            history.push( `/category/${cat.categoryName}`);
+                          }}
                         />
                       </a>
                       <div class="instagram-2-icon">
-                        <a href="product-details.html">
-                          <h6>{cat.categoryName}</h6>
+                        <a href="#" onClick={() => {
+                            history.push( `/category/${cat.categoryName}`);
+                          }}>
+                          <h6 onClick={() => {
+                            history.push( `/category/${cat.categoryName}`);
+                          }}>{cat.categoryName}</h6>
                         </a>
                       </div>
                     </div>

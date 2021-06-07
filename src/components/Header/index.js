@@ -29,8 +29,8 @@ const Header = () => {
                       </li>
 
                       <li>
-                        <Link to="/products">
-                          <a href="categories" className="link-header">
+                        <Link to="/category/all">
+                          <a  className="link-header">
                             Products
                           </a>
                         </Link>

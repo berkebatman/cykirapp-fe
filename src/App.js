@@ -32,7 +32,7 @@ export default function App() {
         <div className="App">
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/products" component={Products} />
+            <Route path="/category/:categoryName" component={Products} />
             <Route path="/product/:id" component={ProductPage} />
             <Route path="/blog" component={Blog} />
             <Route path="/about" component={About} />

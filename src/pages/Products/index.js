@@ -4,19 +4,22 @@ import getProductCategories from "../../services/Categories/getCategories";
 import getProductsByCategory from "../../services/Products/getProductsByCategory";
 import getProducts from "../../services/Products/getProducts";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useHistory } from "react-router";
 import Authentication from "../../services/Authentication";
 
 const auth = new Authentication();
 
 const Products = () => {
   // user management
-
   const jwtPayload = auth.getAccessTokenPayload();
   console.table(jwtPayload);
 
   //state management
-  const [category, setCategory] = useState("All");
+  let history = useHistory();
+  const { categoryName } = useParams();
+  const [category, setCategory] = useState(categoryName);
+  
   const [checked, setChecked] = useState(false);
 
   // decoding
@@ -59,7 +62,7 @@ const Products = () => {
   };
 
   let productsToRender;
-  if (category === "All") {
+  if (category === "all") {
     productsToRender = products.products;
   } else {
     productsToRender = productsByCategory.productsByCategory;
@@ -119,7 +122,7 @@ const Products = () => {
                           <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
                             <div class="product-wrap mb-25 scroll-zoom">
                               <div class="product-img">
-                                <a href="product-details.html">
+                                <a href="#">
                                   <Link to={`product/${product.productId}`}>
                                     <img
                                       class="default-img"
@@ -446,11 +449,12 @@ const Products = () => {
                           href="#"
                           style={{
                             backgroundColor:
-                              category === "All" ? "#8200fc" : "",
-                            color: category === "All" ? "#fff" : "",
+                              category === "all" ? "#8200fc" : "",
+                            color: category === "all" ? "#fff" : "",
                           }}
                           onClick={() => {
-                            setCategory("All");
+                            setCategory("all");
+                            history.push(`/category/all`);
                           }}
                         >
                           All
@@ -471,6 +475,7 @@ const Products = () => {
                               }}
                               onClick={() => {
                                 setCategory(cat.categoryName);
+                                history.push(`/category/${cat.categoryName}`);
                               }}
                             >
                               {cat.categoryName}
