@@ -123,7 +123,7 @@ const Products = () => {
                             <div class="product-wrap mb-25 scroll-zoom">
                               <div class="product-img">
                                 <a href="#">
-                                  <Link to={`product/${product.productId}`}>
+                                  
                                     <img
                                       class="default-img"
                                       src={
@@ -135,9 +135,12 @@ const Products = () => {
                                         width: 250,
                                         borderRadius: "15px",
                                       }}
+                                      onClick={() => {
+                                        history.push( `/product/${product.productId}`);
+                                      }}
                                     />
                                     <img class="hover-img" src="" alt="" />
-                                  </Link>
+                                 
                                 </a>
                                 {/* <span class="pink">-10%</span> */}
                                 <div class="product-action">
@@ -151,7 +154,7 @@ const Products = () => {
                                     style={{ width: "205px" }}
                                   >
                                     <a title="Add To Cart" href="#">
-                                      <i class="pe-7s-cart"></i> Add to cart
+                                      <i class="pe-7s-cart"></i> View Product
                                     </a>
                                   </div>
                                   {/* <div class="pro-same-action pro-quickview">

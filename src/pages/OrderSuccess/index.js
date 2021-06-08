@@ -2,10 +2,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import postUser from "../../services/User/postUser/index.js";
 import useForm from "../../effects/useForm";
 
-const LoginSuccess = () => {
+const OrderSuccess = () => {
+
   return (
     <>
       <div class="login-register-area pt-100 pb-100">
@@ -18,9 +18,9 @@ const LoginSuccess = () => {
                   <div id="lg2" class="tab-pane active">
                     <div class="login-form-container">
                       <div class="login-register-form">
-                       <h3 style={{textAlign: "center"}}>Login Successful!</h3>
+                       <h3 style={{textAlign: "center"}}>Order Successful!</h3>
                        <Link to="/products">
-                        <h5 style={{textAlign: "center", color: "#a749ff"}} >View Products</h5>
+                        <h5 style={{textAlign: "center", color: "#a749ff"}} >View your orders </h5>
                         </Link>
                       </div>
                     </div>
@@ -35,4 +35,4 @@ const LoginSuccess = () => {
   );
 };
 
-export default LoginSuccess;
+export default OrderSuccess;

@@ -20,7 +20,8 @@ import MyAccount from "../src/pages/MyAccount";
 import ProductPage from "../src/pages/ProductPage";
 import RegisterSuccess from "../src/pages/RegisterSuccess";
 import LoginSuccess from "../src/pages/LoginSuccess"
-import ListAnItem from "../src/pages/ListAnItem"
+import ListAnItem from "../src/pages/ListAnItem";
+import OrderSuccess from "../src/pages/OrderSuccess"
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="/myaccount" component={MyAccount} />
             <Route path="/login-success" component={LoginSuccess} />
             <Route path="/list-an-item" component={ListAnItem} />
+            <Route path="/order-success" component={OrderSuccess} />
           </Switch>
         </div>
         <div>

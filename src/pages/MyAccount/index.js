@@ -97,16 +97,6 @@ const MyAccount = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="billing-back-btn">
-                            <div class="billing-back">
-                              <a href="#">
-                                <i class="fa fa-arrow-up"></i> back
-                              </a>
-                            </div>
-                            <div class="billing-btn">
-                              <button type="submit">Continue</button>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>

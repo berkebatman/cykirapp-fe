@@ -23,4 +23,9 @@ const user = {
   login: () => `/login`
 }
 
-export { product, category, blog, user };
+const orders = {
+  order: () => `/order`,
+}
+
+
+export { product, category, blog, user , orders};

@@ -41,11 +41,14 @@ const Home = () => {
               Rent Anything
             </h1>
             <div class="buttons-container">
-              <Link to="/products">
-                <button type="submit">
+              
+                <button type="submit"
+                 onClick={() => {
+                  history.push( `/category/all`);
+                }}>
                   <span>Find an Item</span>
                 </button>
-              </Link>
+        
               <Link to="/list-an-item">
               <button type="submit">
                 <span>List an Item</span>

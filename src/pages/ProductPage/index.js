@@ -3,17 +3,22 @@ import { useParams } from "react-router-dom";
 import useAPI from "../../effects/useAPI";
 import getProductById from "../../services/Products/getProductById";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import {
-  DatePicker,
-  TimePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import postOrder from "../../services/Order/postOrder";
+import Authentication from "../../services/Authentication";
+import { useHistory } from "react-router";
+
+const auth = new Authentication();
 
 const ProductPage = () => {
+  const history = useHistory();
   const { id } = useParams();
-  const [selectedDate, handleDateChange] = useState(new Date());
-
+  const jwtPayload = auth.getAccessTokenPayload();
+  const userId = jwtPayload[0].userId
+  const [selectedStartDate, handleStartDateChange] = useState(new Date());
+  const [selectedEndDate, handleEndDateChange] = useState(new Date());
+  console.log(id, "id")
+  
   const [productLoading, productError, product] = useAPI(
     () => getProductById({ productId: id }),
     [id]
@@ -26,6 +31,20 @@ const ProductPage = () => {
   if (productError) {
     return <div>Something went wrong</div>;
   }
+
+  const handleOrder = (event) => {
+    event.preventDefault();
+    postOrder({
+      userId,
+      productId: id,
+    })
+      .then(() => {
+        history.push("/order-success");
+      })
+      .catch((err) => console.log(err, "nope"));
+  };
+
+  console.log(product);
 
   return (
     <>
@@ -40,7 +59,7 @@ const ProductPage = () => {
                       <img
                         src={"http://localhost:3001/" + product.image}
                         alt=""
-                        style={{ height: "500px", width: "500px" }}
+                        style={{ height: "400px", width: "400px" }}
                       />
                     </div>
                     <div class="zoompro-wrap zoompro-2 pl-20">
@@ -63,18 +82,6 @@ const ProductPage = () => {
                     <h2>{product.productName}</h2>
                     <div class="product-details-price">
                       <span>{product.price}₺/day</span>
-                      <span
-                        class="product-video"
-                        style={{
-                          marginLeft: "15px",
-                          fontSize: "16px",
-                          color: product.availability === 1 ? "green" : "red",
-                        }}
-                      >
-                        {product.availability === 1
-                          ? `Available`
-                          : `Out of Stock`}
-                      </span>
                     </div>
                     <div class="pro-details-rating-wrap">
                       <div class="pro-details-rating">
@@ -121,47 +128,75 @@ const ProductPage = () => {
                     <p style={{ textAlign: "left" }}>
                       {product.productDescription}
                     </p>
-                    <div class="pro-details-list" style={{ alignText: "left" }}>
+                    <div
+                      class="pro-details-list"
+                      style={{ alignText: "left", paddingBottom: "0" }}
+                    >
                       <ul>
                         <li
                           style={{ fontWeight: "bold" }}
                         >{`${product.firstName} ${product.lastName}`}</li>
-                        <li>{product.town}</li>
-                        <li>{product.city}</li>
+                        <li>{product.productTown}</li>
+                        <li>{product.productCity}</li>
                       </ul>
                     </div>
                     <div class="pro-details-size-color">
-                      <div class="pro-details-size" style={{display:"flex", flexDirection:"row", justifyContent:"center", alignitems:"center"}}>
-                        
-                        
-                        <div style={{marginLeft:"10px", textAlign:"left"}} class="pro-details-size-content">
-                        <span>Starts on</span>
+                      <div
+                        class="pro-details-size"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignitems: "center",
+                        }}
+                      >
+                        <div
+                          style={{ marginLeft: "10px", textAlign: "left" }}
+                          class="pro-details-size-content"
+                        >
+                          <span>Starts on</span>
                           <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <DatePicker
-                              value={selectedDate}
-                              onChange={handleDateChange}
-                            />
-                          </MuiPickersUtilsProvider>
-                          </div>
-                       
-                        
-                        
-                        
-                        <div class="pro-details-size-content" style={{marginLeft:"10px", textAlign:"left"}}>
-                        <span>Ends on</span>
-                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <DatePicker
-                              value={selectedDate}
-                              onChange={handleDateChange}
+                              value={selectedStartDate}
+                              onChange={handleStartDateChange}
                             />
                           </MuiPickersUtilsProvider>
                         </div>
+
+                        <div
+                          class="pro-details-size-content"
+                          style={{ marginLeft: "10px", textAlign: "left" }}
+                        >
+                          <span>Ends on</span>
+                          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <DatePicker
+                              value={selectedEndDate}
+                              onChange={handleEndDateChange}
+                            />
+                          </MuiPickersUtilsProvider>
                         </div>
-                    
+                      </div>
+                    </div>
+                    <div>
+                      {selectedEndDate < selectedStartDate ? (
+                        <div
+                          style={{
+                            color: "red",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            marginTop: "20px",
+                            textAlign: "left",
+                          }}
+                        >
+                          Selected end date must be later than start date.
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
                     </div>
                     <div class="pro-details-quality">
                       <div class="pro-details-cart btn-hover">
-                        <a href="#">Order</a>
+                        <a href="#" onClick={handleOrder}>Order</a>
                       </div>
                     </div>
                     <div class="pro-details-meta">
