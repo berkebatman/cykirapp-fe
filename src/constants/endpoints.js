@@ -27,5 +27,10 @@ const orders = {
   order: () => `/order`,
 }
 
+const calendar = {
+  getBookedDatesByProductId: () => `/datesbooked`,
+  postBookedDate: () => `/bookdates`
+}
 
-export { product, category, blog, user , orders};
+
+export { product, category, blog, user , orders, calendar};

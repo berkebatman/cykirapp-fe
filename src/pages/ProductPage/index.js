@@ -3,22 +3,54 @@ import { useParams } from "react-router-dom";
 import useAPI from "../../effects/useAPI";
 import getProductById from "../../services/Products/getProductById";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import postOrder from "../../services/Order/postOrder";
 import Authentication from "../../services/Authentication";
 import { useHistory } from "react-router";
+import postBookedDate from "../../services/Calendar/postBookedDate";
+import DatePanel from "react-multi-date-picker/plugins/date_panel";
+import DatePicker from "react-multi-date-picker";
 
 const auth = new Authentication();
 
 const ProductPage = () => {
+  // react default hooks
   const history = useHistory();
+
+  // state management
+  const [values, setValues] = useState([new Date(), new Date().getDate() + 1]);
+
+  console.log(values, "values");
+
+  // productId management
   const { id } = useParams();
+
+  //user management
   const jwtPayload = auth.getAccessTokenPayload();
-  const userId = jwtPayload[0].userId
+  const userId = jwtPayload[0].userId;
+
+  //////////////// date management starts
   const [selectedStartDate, handleStartDateChange] = useState(new Date());
   const [selectedEndDate, handleEndDateChange] = useState(new Date());
-  console.log(id, "id")
-  
+  const getDaysArray = function (start, end) {
+    let arr = [];
+    let dt;
+    for (dt = new Date(start); dt <= end; dt.setDate(dt.getDate() + 1)) {
+      arr.push(new Date(dt));
+    }
+    return arr;
+  };
+  const daylist = getDaysArray(
+    new Date(selectedStartDate),
+    new Date(selectedEndDate)
+  );
+  const formattedDatesList = daylist
+    .map((v) => v.toISOString().slice(0, 10))
+    .join(",");
+  console.log(formattedDatesList.split(","), "formattedDatesList");
+  const datesNeeded = formattedDatesList.split(",");
+  ////////////// date management ends
+
   const [productLoading, productError, product] = useAPI(
     () => getProductById({ productId: id }),
     [id]
@@ -39,6 +71,21 @@ const ProductPage = () => {
       productId: id,
     })
       .then(() => {
+        const forLoop = async () => {
+          for (let i = 0; i < datesNeeded.length; i++) {
+            let dateToPost = datesNeeded[i];
+            console.log(dateToPost);
+            // eslint-disable-next-line no-unused-vars
+            const bookDate = await postBookedDate({
+              userId,
+              productId: id,
+              date: dateToPost,
+            });
+          }
+        };
+        forLoop();
+      })
+      .then(() => {
         history.push("/order-success");
       })
       .catch((err) => console.log(err, "nope"));
@@ -50,7 +97,7 @@ const ProductPage = () => {
     <>
       {product.productById.map((product) => {
         return (
-          <div class="shop-area pt-100 pb-100">
+          <div class="shop-area pt-100 pb-80">
             <div class="container">
               <div class="row">
                 <div class="col-xl-7 col-lg-7 col-md-12">
@@ -133,14 +180,90 @@ const ProductPage = () => {
                       style={{ alignText: "left", paddingBottom: "0" }}
                     >
                       <ul>
-                        <li
-                          style={{ fontWeight: "bold" }}
-                        >{`${product.firstName} ${product.lastName}`}</li>
-                        <li>{product.productTown}</li>
-                        <li>{product.productCity}</li>
+                        <li>
+                          <span
+                            style={{
+                              fontWeight: "bold",
+                              display: "block",
+                              marginRight: "5px",
+                            }}
+                          >
+                            Product Owner:
+                          </span>{" "}
+                          <span>
+                            {`${product.firstName} ${product.lastName}`}{" "}
+                          </span>
+                        </li>
+                        <li>
+                          {" "}
+                          <span
+                            style={{
+                              fontWeight: "bold",
+                              display: "block",
+                              marginRight: "5px",
+                            }}
+                          >
+                            Product town:
+                          </span>
+                          {product.productTown}
+                        </li>
+
+                        <li>
+                          {" "}
+                          <span
+                            style={{
+                              fontWeight: "bold",
+                              display: "block",
+                              marginRight: "5px",
+                            }}
+                          >
+                            Product City:
+                          </span>
+                          {product.productCity}
+                        </li>
+
+                        <li>
+                          {" "}
+                          <span
+                            style={{
+                              fontWeight: "bold",
+                              display: "block",
+                              marginRight: "5px",
+                            }}
+                          >
+                            Category
+                          </span>
+                          Storage
+                        </li>
                       </ul>
                     </div>
-                    <div class="pro-details-size-color">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div>
+                        <h4>Select Dates</h4>
+                        <DatePicker
+                          range
+                          value={values}
+                          onChange={setValues}
+                        />
+                      </div>
+                      <div
+                        class="pro-details-quality"
+                        style={{ justifyContent: "center" }}
+                      >
+                        <div class="pro-details-cart btn-hover">
+                          <a href="#" onClick={handleOrder}>
+                            Order
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <div class="pro-details-size-color">
                       <div
                         class="pro-details-size"
                         style={{
@@ -177,6 +300,7 @@ const ProductPage = () => {
                         </div>
                       </div>
                     </div>
+                    x */}
                     <div>
                       {selectedEndDate < selectedStartDate ? (
                         <div
@@ -194,21 +318,9 @@ const ProductPage = () => {
                         <div></div>
                       )}
                     </div>
-                    <div class="pro-details-quality">
-                      <div class="pro-details-cart btn-hover">
-                        <a href="#" onClick={handleOrder}>Order</a>
-                      </div>
-                    </div>
-                    <div class="pro-details-meta">
-                      <span>Category :</span>
-                      <ul>
-                        <li>
-                          <a href="#">Musical Instruments</a>
-                        </li>
-                      </ul>
-                    </div>
+
                     <div class="pro-details-social">
-                      <ul>
+                      <ul style={{ justifyContent: "center" }}>
                         <li>
                           <a href="#">
                             <i class="fa fa-facebook"></i>
