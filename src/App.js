@@ -21,7 +21,9 @@ import ProductPage from "../src/pages/ProductPage";
 import RegisterSuccess from "../src/pages/RegisterSuccess";
 import LoginSuccess from "../src/pages/LoginSuccess"
 import ListAnItem from "../src/pages/ListAnItem";
-import OrderSuccess from "../src/pages/OrderSuccess"
+import OrderSuccess from "../src/pages/OrderSuccess";
+import 'react-dates/lib/css/_datepicker.css';
+import 'react-dates/initialize';
 
 export default function App() {
   return (

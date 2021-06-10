@@ -2,25 +2,26 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAPI from "../../effects/useAPI";
 import getProductById from "../../services/Products/getProductById";
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+// import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+// import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import postOrder from "../../services/Order/postOrder";
 import Authentication from "../../services/Authentication";
 import { useHistory } from "react-router";
 import postBookedDate from "../../services/Calendar/postBookedDate";
-import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import DatePicker from "react-multi-date-picker";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController,
+} from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import "react-dates/initialize";
+import getBookedDatesByProductId from "../../services/Calendar/getBookedDateProductId";
 
 const auth = new Authentication();
 
 const ProductPage = () => {
   // react default hooks
   const history = useHistory();
-
-  // state management
-  const [values, setValues] = useState([new Date(), new Date().getDate() + 1]);
-
-  console.log(values, "values");
 
   // productId management
   const { id } = useParams();
@@ -30,8 +31,9 @@ const ProductPage = () => {
   const userId = jwtPayload[0].userId;
 
   //////////////// date management starts
-  const [selectedStartDate, handleStartDateChange] = useState(new Date());
-  const [selectedEndDate, handleEndDateChange] = useState(new Date());
+  const [startDate, setStartDate] = React.useState();
+  const [endDate, setEndDate] = React.useState();
+  const [focusedInput, setFocusedInput] = React.useState();
   const getDaysArray = function (start, end) {
     let arr = [];
     let dt;
@@ -41,8 +43,8 @@ const ProductPage = () => {
     return arr;
   };
   const daylist = getDaysArray(
-    new Date(selectedStartDate),
-    new Date(selectedEndDate)
+    new Date(startDate),
+    new Date(endDate)
   );
   const formattedDatesList = daylist
     .map((v) => v.toISOString().slice(0, 10))
@@ -50,17 +52,26 @@ const ProductPage = () => {
   console.log(formattedDatesList.split(","), "formattedDatesList");
   const datesNeeded = formattedDatesList.split(",");
   ////////////// date management ends
+  console.log(id, "productId")
+
+  const [datesBookedLoading, datesBookedError, datesBooked] =   useAPI(
+    () => getBookedDatesByProductId({ productId: id }),
+    [id]
+  );
+  console.log(datesBooked)
+
+  // let result = datesBooked.map(a => a.datesBooked);
 
   const [productLoading, productError, product] = useAPI(
     () => getProductById({ productId: id }),
     [id]
   );
 
-  if (productLoading) {
+  if (productLoading || datesBookedLoading) {
     return <div>Loading...</div>;
   }
 
-  if (productError) {
+  if (productError || datesBookedError) {
     return <div>Something went wrong</div>;
   }
 
@@ -231,7 +242,7 @@ const ProductPage = () => {
                               marginRight: "5px",
                             }}
                           >
-                            Category
+                            Category:
                           </span>
                           Storage
                         </li>
@@ -246,10 +257,20 @@ const ProductPage = () => {
                     >
                       <div>
                         <h4>Select Dates</h4>
-                        <DatePicker
-                          range
-                          value={values}
-                          onChange={setValues}
+                        <DateRangePicker
+                          startDate={startDate}
+                          startDateId="start-date"
+                          endDate={endDate}
+                          endDateId="end-date"
+                          onDatesChange={({ startDate, endDate }) => {
+                            setStartDate(startDate);
+                            setEndDate(endDate);
+                          }}
+                          focusedInput={focusedInput}
+                          onFocusChange={(focusedInput) =>
+                            setFocusedInput(focusedInput)
+                          }
+                          openDirection={"up"}
                         />
                       </div>
                       <div
@@ -301,7 +322,7 @@ const ProductPage = () => {
                       </div>
                     </div>
                     x */}
-                    <div>
+                    {/* <div>
                       {selectedEndDate < selectedStartDate ? (
                         <div
                           style={{
@@ -317,7 +338,7 @@ const ProductPage = () => {
                       ) : (
                         <div></div>
                       )}
-                    </div>
+                    </div> */}
 
                     <div class="pro-details-social">
                       <ul style={{ justifyContent: "center" }}>

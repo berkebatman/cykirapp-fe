@@ -28,7 +28,7 @@ const orders = {
 }
 
 const calendar = {
-  getBookedDatesByProductId: () => `/datesbooked`,
+  getBookedDatesByProductId: ({productId}) => `/datesbooked/${productId}`,
   postBookedDate: () => `/bookdates`
 }
 
