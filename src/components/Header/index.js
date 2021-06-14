@@ -44,13 +44,13 @@ const Header = () => {
                         </Link>
                       </li>
 
-                      <li>
+                      {/* <li>
                         <Link to="/blog">
                           <a href="blog" className="link-header">
                             Blog
                           </a>
                         </Link>
-                      </li>
+                      </li> */}
 
                       
 
@@ -89,10 +89,10 @@ const Header = () => {
                             <a href="wishlist.html"><i class="pe-7s-like"></i></a>
                         </div> */}
                         <div class="same-style cart-wrap">
-                            <button class="icon-cart">
+                            {/* <button class="icon-cart">
                                 <i class="pe-7s-shopbag"></i>
                                 <span class="count-style">02</span>
-                            </button>
+                            </button> */}
                             <div class="shopping-cart-content">
                                 <ul>
                                     <li class="single-shopping-cart">

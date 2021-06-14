@@ -2,6 +2,7 @@ import React from "react";
 import Authentication from "../../services/Authentication";
 import getProductsByUserId from "../../services/Products/getProductsByUserId";
 import useAPI from "../../effects/useAPI";
+import myOrders from "../../services/Order/getOrdersByUserId/index"
 
 const auth = new Authentication();
 
@@ -17,11 +18,18 @@ const MyAccount = () => {
   );
   console.log(userProducts);
 
-  if (loading) {
+  const [ordersLoading, ordersError, orders] = useAPI(
+    () => myOrders({ userId: id }),
+    [id]
+  );
+
+  console.log(orders)
+
+  if (loading || ordersLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error || ordersError) {
     return <div>Something went wrong</div>;
   }
 
@@ -129,10 +137,7 @@ const MyAccount = () => {
                                     <tr>
                                       <th>Image</th>
                                       <th>Product Name</th>
-                                      <th>Daily Rentail Price</th>
-                                      <th>Product City</th>
-                                      <th>Product Town</th>
-                                      <th>Open Rental Orders</th>
+                                      <th>Daily Rental Price</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -152,9 +157,7 @@ const MyAccount = () => {
                                       <td class="product-price-cart">
                                         <span class="amount">{product.price}</span>
                                       </td>
-                                      <td class="product-subtotal">$150.00</td>
-                                      <td class="product-subtotal">$150.00</td>
-                                      <td class="product-subtotal">$150.00</td>
+                                     
                                     </tr>
                                   </tbody>
                                 </table>
@@ -176,11 +179,13 @@ const MyAccount = () => {
                           data-parent="#faq"
                           href="#my-account-3"
                         >
-                          Your Products{" "}
+                          Your Orders{" "}
                         </a>
                       </h3>
                     </div>
                     <div id="my-account-3" class="panel-collapse collapse">
+                    {orders.ordersByUserId.map((order) => { 
+                            return  (
                       <div class="panel-body">
                         <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -191,73 +196,30 @@ const MyAccount = () => {
                                     <tr>
                                       <th>Image</th>
                                       <th>Product Name</th>
-                                      <th>Until Price</th>
-                                      <th>Qty</th>
-                                      <th>Subtotal</th>
-                                      <th>Add To Cart</th>
+                                      
+                                      <th>Daily Rental Price</th>   
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
-                                      <td class="product-thumbnail">
+                                    <td class="product-thumbnail">
                                         <a href="#">
                                           <img
-                                            src="assets/img/cart/cart-2.png"
+                                            src={"http://localhost:3001/" + order.image}
+                                            style={{height: "65px,", width: "65px"}}
                                             alt=""
                                           />
                                         </a>
                                       </td>
                                       <td class="product-name">
-                                        <a href="#">Product Name</a>
+                                        <a href="#">{order.productName}</a>
                                       </td>
+                                    
                                       <td class="product-price-cart">
-                                        <span class="amount">$150.00</span>
-                                      </td>
-                                      <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                          <input
-                                            class="cart-plus-minus-box"
-                                            type="text"
-                                            name="qtybutton"
-                                            value="2"
-                                          />
-                                        </div>
-                                      </td>
-                                      <td class="product-subtotal">$150.00</td>
-                                      <td class="product-wishlist-cart">
-                                        <a href="#">add to cart</a>
+                                        <span class="amount">{order.price}</span>
                                       </td>
                                     </tr>
-                                    <tr>
-                                      <td class="product-thumbnail">
-                                        <a href="#">
-                                          <img
-                                            src="assets/img/cart/cart-1.png"
-                                            alt=""
-                                          />
-                                        </a>
-                                      </td>
-                                      <td class="product-name">
-                                        <a href="#">Product Name</a>
-                                      </td>
-                                      <td class="product-price-cart">
-                                        <span class="amount">$170.00</span>
-                                      </td>
-                                      <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                          <input
-                                            class="cart-plus-minus-box"
-                                            type="text"
-                                            name="qtybutton"
-                                            value="2"
-                                          />
-                                        </div>
-                                      </td>
-                                      <td class="product-subtotal">$170.00</td>
-                                      <td class="product-wishlist-cart">
-                                        <a href="#">add to cart</a>
-                                      </td>
-                                    </tr>
+                                   
                                   </tbody>
                                 </table>
                               </div>
@@ -265,6 +227,8 @@ const MyAccount = () => {
                           </div>
                         </div>
                       </div>
+                      )  
+                    })}
                     </div>
                   </div>
                 </div>

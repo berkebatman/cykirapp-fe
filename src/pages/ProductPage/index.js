@@ -42,25 +42,21 @@ const ProductPage = () => {
     }
     return arr;
   };
-  const daylist = getDaysArray(
-    new Date(startDate),
-    new Date(endDate)
-  );
+  const daylist = getDaysArray(new Date(startDate), new Date(endDate));
   const formattedDatesList = daylist
     .map((v) => v.toISOString().slice(0, 10))
     .join(",");
-  console.log(formattedDatesList.split(","), "formattedDatesList");
   const datesNeeded = formattedDatesList.split(",");
-  ////////////// date management ends
-  console.log(id, "productId")
+  ////////////// date management end
 
-  const [datesBookedLoading, datesBookedError, datesBooked] =   useAPI(
+  const [datesBookedLoading, datesBookedError, datesBooked] = useAPI(
     () => getBookedDatesByProductId({ productId: id }),
     [id]
   );
-  console.log(datesBooked)
 
-  // let result = datesBooked.map(a => a.datesBooked);
+  const arrayOfDatesBooked = datesBooked.bookedDates;
+
+  console.log(typeof(arrayOfDatesBooked), "typeOf")
 
   const [productLoading, productError, product] = useAPI(
     () => getProductById({ productId: id }),
@@ -85,7 +81,6 @@ const ProductPage = () => {
         const forLoop = async () => {
           for (let i = 0; i < datesNeeded.length; i++) {
             let dateToPost = datesNeeded[i];
-            console.log(dateToPost);
             // eslint-disable-next-line no-unused-vars
             const bookDate = await postBookedDate({
               userId,
@@ -101,8 +96,6 @@ const ProductPage = () => {
       })
       .catch((err) => console.log(err, "nope"));
   };
-
-  console.log(product);
 
   return (
     <>
@@ -137,12 +130,12 @@ const ProductPage = () => {
                 </div>
                 <div class="col-lg-5 col-lg-5 col-md-12">
                   <div class="product-details-content">
-                    <h2>{product.productName}</h2>
+                    <h2 style={{textAlign: "left"}}>{product.productName}</h2>
                     <div class="product-details-price">
                       <span>{product.price}₺/day</span>
                     </div>
                     <div class="pro-details-rating-wrap">
-                      <div class="pro-details-rating">
+                      <div class="pro-details-rating" style={{border: "0px"}}>
                         <i
                           class={`${
                             product.rating >= 1
@@ -179,9 +172,9 @@ const ProductPage = () => {
                           }`}
                         ></i>
                       </div>
-                      <span>
+                      {/* <span>
                         <a href="#">3 Reviews</a>
-                      </span>
+                      </span> */}
                     </div>
                     <p style={{ textAlign: "left" }}>
                       {product.productDescription}
@@ -232,20 +225,6 @@ const ProductPage = () => {
                           </span>
                           {product.productCity}
                         </li>
-
-                        <li>
-                          {" "}
-                          <span
-                            style={{
-                              fontWeight: "bold",
-                              display: "block",
-                              marginRight: "5px",
-                            }}
-                          >
-                            Category:
-                          </span>
-                          Storage
-                        </li>
                       </ul>
                     </div>
                     <div
@@ -253,6 +232,7 @@ const ProductPage = () => {
                         display: "flex",
                         justifyContent: "space-around",
                         alignItems: "center",
+                        flexDirection: "column",
                       }}
                     >
                       <div>
@@ -278,7 +258,7 @@ const ProductPage = () => {
                         style={{ justifyContent: "center" }}
                       >
                         <div class="pro-details-cart btn-hover">
-                          <a href="#" onClick={handleOrder}>
+                          <a href="#" onClick={handleOrder} s>
                             Order
                           </a>
                         </div>

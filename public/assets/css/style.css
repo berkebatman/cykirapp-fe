@@ -7655,15 +7655,7 @@ a.default-btn {
   position: relative;
   margin-right: 39px;
 }
-.product-details-content .pro-details-rating-wrap .pro-details-rating:before {
-  position: absolute;
-  right: -19px;
-  top: 4px;
-  content: "";
-  height: 15px;
-  width: 2px;
-  background-color: #d1d1d1;
-}
+
 .product-details-content .pro-details-rating-wrap .pro-details-rating i {
   color: #5f5d5d;
   font-size: 17px;

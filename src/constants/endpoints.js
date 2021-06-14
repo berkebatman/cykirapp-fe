@@ -25,6 +25,7 @@ const user = {
 
 const orders = {
   order: () => `/order`,
+  getOrdersByUserId: ({ userId }) => `/myorders/${userId}`
 }
 
 const calendar = {
