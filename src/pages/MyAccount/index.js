@@ -117,6 +117,7 @@ const MyAccount = () => {
                           data-toggle="collapse"
                           data-parent="#faq"
                           href="#my-account-2"
+                          style={{ fontWeight: "bold" }}
                         >
                           Your Products{" "}
                         </a>
@@ -178,6 +179,7 @@ const MyAccount = () => {
                           data-toggle="collapse"
                           data-parent="#faq"
                           href="#my-account-3"
+                          style={{ fontWeight: "bold" }}
                         >
                           Your Orders{" "}
                         </a>
