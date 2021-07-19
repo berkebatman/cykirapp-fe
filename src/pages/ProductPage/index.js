@@ -26,7 +26,7 @@ const ProductPage = () => {
   // productId management
   const { id } = useParams();
 
-  //user management
+  //user managements
   const jwtPayload = auth.getAccessTokenPayload();
   const userId = jwtPayload[0].userId;
 
@@ -49,25 +49,25 @@ const ProductPage = () => {
   const datesNeeded = formattedDatesList.split(",");
   ////////////// date management end
 
-  const [datesBookedLoading, datesBookedError, datesBooked] = useAPI(
-    () => getBookedDatesByProductId({ productId: id }),
-    [id]
-  );
+  // const [datesBookedLoading, datesBookedError, datesBooked] = useAPI(
+  //   () => getBookedDatesByProductId({ productId: id }),
+  //   [id]
+  // );
 
-  const arrayOfDatesBooked = datesBooked.bookedDates;
+  // const arrayOfDatesBooked = datesBooked.bookedDates;
 
-  console.log(typeof(arrayOfDatesBooked), "typeOf")
+  // console.log(typeof(arrayOfDatesBooked), "typeOf")
 
   const [productLoading, productError, product] = useAPI(
     () => getProductById({ productId: id }),
     [id]
   );
 
-  if (productLoading || datesBookedLoading) {
+  if (productLoading) {
     return <div>Loading...</div>;
   }
 
-  if (productError || datesBookedError) {
+  if (productError) {
     return <div>Something went wrong</div>;
   }
 
